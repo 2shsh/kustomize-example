@@ -1,0 +1,11 @@
+resources:
+  - ../../base
+
+patches:
+  - target:
+      kind: Deployment
+    path: deployment_patch.yaml
+
+  - target:
+      kind: CronJob
+    path: cronjob_patch.yaml

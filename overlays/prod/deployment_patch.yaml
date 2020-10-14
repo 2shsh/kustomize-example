@@ -1,0 +1,13 @@
+- op: add
+  path: /spec/template/spec/containers/0/env
+  value:
+    - name: GUNICORN_WORKERS
+      value: "6"
+    - name: GUNICORN_THREADS
+      value: "1"
+    - name: GUNICORN_TIMEOUT
+      value: "60"
+    - name: DB_CONNECTION_TIMEOUT
+      value: "3"
+    - name: DB_POOL_PRE_PING
+      value: "false"

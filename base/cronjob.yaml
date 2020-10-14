@@ -1,0 +1,35 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  labels:
+    app: outbound
+  name: partition-upgrader
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      labels:
+        app: outbound
+    spec:
+      template:
+        metadata:
+          labels:
+            cron: partition-upgrader
+        spec:
+          containers:
+          - command:
+            - bin/call
+            image: dummy:dummy
+            imagePullPolicy: IfNotPresent
+            name: partition-upgrader
+            resources:
+              limits:
+                cpu: 300m
+                memory: 0.3Gi
+              requests:
+                cpu: 300m
+                memory: 0.3Gi
+          restartPolicy: OnFailure
+  schedule: 0 3 *  * *
+  successfulJobsHistoryLimit: 3
